@@ -19,7 +19,13 @@ setInterval(() => {
 	let c = getRandom(1, gCols - 1);
 	gBoard[r][c].gameElement = BALL
 	renderCell({ i: r, j: c }, BALL_IMG);
-}, 2000)
+	++gBallCount;
+}, 2500)
+
+function win() {
+	alert("You Win!");
+	initGame();
+}
 
 function initGame() {
 	gGamerPos = { i: 2, j: 9 };
@@ -115,6 +121,7 @@ function moveTo(i, j) {
 
 		if (targetCell.gameElement === BALL) {
 			console.log('Collecting!');
+			gBallCount -= 1;
 		}
 
 		// MOVING from current position
@@ -133,6 +140,9 @@ function moveTo(i, j) {
 
 	} // else console.log('TOO FAR', iAbsDiff, jAbsDiff);
 
+	if (gBallCount === 0) {
+		win();
+	}
 }
 
 // Convert a location object {i, j} to a selector and render a value in that element
