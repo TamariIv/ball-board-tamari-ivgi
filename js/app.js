@@ -13,6 +13,7 @@ const gRows = 10;
 const gCols = 12;
 
 let gBallCount;
+let gBallsCaptured = 0;
 
 setInterval(() => {
 	let r = getRandom(1, gRows - 1);
@@ -27,10 +28,17 @@ function win() {
 	initGame();
 }
 
+function renderCount() {
+	let count = document.querySelector('.count');
+	count.innerHTML = 'Count: ' + gBallsCaptured;
+}
+
 function initGame() {
 	gGamerPos = { i: 2, j: 9 };
 	gBoard = buildBoard();
 	renderBoard(gBoard);
+	gBallsCaptured = 0;
+	renderCount();
 }
 
 
@@ -122,6 +130,8 @@ function moveTo(i, j) {
 		if (targetCell.gameElement === BALL) {
 			console.log('Collecting!');
 			gBallCount -= 1;
+			++gBallsCaptured;
+			renderCount();
 		}
 
 		// MOVING from current position
