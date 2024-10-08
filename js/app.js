@@ -33,6 +33,10 @@ function renderCount() {
 	count.innerHTML = 'Count: ' + gBallsCaptured;
 }
 
+function restart() {
+	initGame();
+}
+
 function initGame() {
 	gGamerPos = { i: 2, j: 9 };
 	gBoard = buildBoard();
