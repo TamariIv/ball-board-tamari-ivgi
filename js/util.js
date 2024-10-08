@@ -9,3 +9,7 @@ function createMat(ROWS, COLS) {
     }
     return mat
 }
+
+function getRandom(min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
+}

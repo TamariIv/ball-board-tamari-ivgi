@@ -8,6 +8,19 @@ var BALL_IMG = '<img src="img/ball.png" />';
 
 var gBoard;
 var gGamerPos;
+
+const gRows = 10;
+const gCols = 12;
+
+let gBallCount;
+
+setInterval(() => {
+	let r = getRandom(1, gRows - 1);
+	let c = getRandom(1, gCols - 1);
+	gBoard[r][c].gameElement = BALL
+	renderCell({ i: r, j: c }, BALL_IMG);
+}, 2000)
+
 function initGame() {
 	gGamerPos = { i: 2, j: 9 };
 	gBoard = buildBoard();
@@ -45,6 +58,7 @@ function buildBoard() {
 	// Place the Balls (currently randomly chosen positions)
 	board[3][8].gameElement = BALL;
 	board[7][4].gameElement = BALL;
+	gBallCount = 2;
 
 	console.log(board);
 	return board;
