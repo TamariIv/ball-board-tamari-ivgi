@@ -78,6 +78,9 @@ function buildBoard() {
 	board[7][4].gameElement = BALL;
 	gBallCount = 2;
 
+	board[0][9].type = FLOOR;
+	board[gRows - 1][9].type = FLOOR;
+
 	console.log(board);
 	return board;
 }
@@ -146,8 +149,21 @@ function moveTo(i, j) {
 
 		// MOVING to selected position
 		// Model:
-		gGamerPos.i = i;
-		gGamerPos.j = j;
+		if (i === 0 || i === (gRows - 1)) {
+			// if gamer is in horizontal hole
+			gGamerPos.j = (i === 0) ? gRows - 1 : 0;
+			gGamerPos.j = j;
+		}
+		else if (j === 0 || j === (gCols - 1)) {
+			// if gamer is in vertical hole
+			gGamerPos.j = (j === 0) ? gCols - 1 : 0;
+			gGamerPos.i = i;
+		}
+		else {
+			gGamerPos.i = i;
+			gGamerPos.j = j;
+		}
+
 		gBoard[gGamerPos.i][gGamerPos.j].gameElement = GAMER;
 		// DOM:
 		renderCell(gGamerPos, GAMER_IMG);
